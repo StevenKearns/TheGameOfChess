@@ -10,25 +10,16 @@
             large
             color="blue"
             class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
+            @click.stop="startGameDialog = true"
             >Play</v-btn
           ></v-col
         >
-
         <v-col
           ><v-btn
             large
             color="blue"
             class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
+            @click.stop="instructionsDialog = true"
             >Instructions</v-btn
           ></v-col
         ><v-col>
@@ -36,14 +27,19 @@
             large
             color="blue"
             class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
+            @click.stop="aboutDialog = true"
             >About</v-btn
           ></v-col
         >
+        <v-dialog v-model="startGameDialog" max-width="600"
+          ><StartGamePopup></StartGamePopup
+        ></v-dialog>
+        <v-dialog v-model="instructionsDialog" max-width="600"
+          ><InstructionsPopup></InstructionsPopup
+        ></v-dialog>
+        <v-dialog v-model="aboutDialog" max-width="600"
+          ><AboutPopup></AboutPopup
+        ></v-dialog>
         <!-- <section class="headline"></section> -->
       </v-container>
     </v-container>
@@ -51,8 +47,20 @@
 </template>
 
 <script>
+import AboutPopup from "@/components/AboutPopup";
+import StartGamePopup from "@/components/StartGamePopup";
+import InstructionsPopup from "@/components/InstructionsPopup";
 export default {
   name: "MainScreen",
-  data: () => ({}),
+  data: () => ({
+    startGameDialog: false,
+    instructionsDialog: false,
+    aboutDialog: false,
+  }),
+  components: {
+    AboutPopup,
+    StartGamePopup,
+    InstructionsPopup,
+  },
 };
 </script>
