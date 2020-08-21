@@ -8,51 +8,43 @@
         <v-col
           ><v-btn
             large
-            color="blue"
+            color="primary"
             class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
-            >Play</v-btn
+            @click.stop="instructionsDialog = true"
+            >Help</v-btn
           ></v-col
         >
-
         <v-col
           ><v-btn
             large
-            color="blue"
+            color="error"
             class="mx-1"
             @click="
               $router.push({
-                name: 'GameScreen',
+                name: 'RoundEnd',
               })
             "
-            >Instructions</v-btn
-          ></v-col
-        ><v-col>
-          <v-btn
-            large
-            color="blue"
-            class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
-            >About</v-btn
+            >Resign</v-btn
           ></v-col
         >
-        <!-- <section class="headline"></section> -->
+        <!-- TODO: make an "are you sure" dialog when resigning. -->
+        <!-- TODO: propose a draw. Not in MVP scope. -->
+
+        <v-dialog v-model="instructionsDialog" max-width="600"
+          ><InstructionsPopup></InstructionsPopup
+        ></v-dialog>
       </v-container>
     </v-container>
   </v-app>
 </template>
 
 <script>
+import InstructionsPopup from "@/components/InstructionsPopup";
 export default {
   name: "MainScreen",
-  data: () => ({}),
+  data: () => ({ instructionsDialog: false }),
+  components: {
+    InstructionsPopup: InstructionsPopup,
+  },
 };
 </script>
