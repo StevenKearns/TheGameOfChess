@@ -8,7 +8,7 @@
         <v-col
           ><v-btn
             large
-            color="blue"
+            color="primary"
             class="mx-1"
             @click.stop="startGameDialog = true"
             >Play</v-btn
@@ -17,7 +17,7 @@
         <v-col
           ><v-btn
             large
-            color="blue"
+            color="primary"
             class="mx-1"
             @click.stop="instructionsDialog = true"
             >Instructions</v-btn
@@ -25,7 +25,7 @@
         ><v-col>
           <v-btn
             large
-            color="blue"
+            color="primary"
             class="mx-1"
             @click.stop="aboutDialog = true"
             >About</v-btn
