@@ -2,48 +2,24 @@
   <v-app>
     <v-container>
       <h1 class="display-3 font-weight-bold my-5 text-center">
-        The Game of Chess
+        You suffered a horrible defeat
       </h1>
       <v-container class="text-center">
+        <!-- TODO: rematch button. Not in MVP scope -->
         <v-col
           ><v-btn
             large
-            color="blue"
+            color="primary"
             class="mx-1"
             @click="
               $router.push({
-                name: 'GameScreen',
+                name: 'MainMenu',
               })
             "
-            >Play</v-btn
+            >Return to Main Menu</v-btn
           ></v-col
         >
 
-        <v-col
-          ><v-btn
-            large
-            color="blue"
-            class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
-            >Instructions</v-btn
-          ></v-col
-        ><v-col>
-          <v-btn
-            large
-            color="blue"
-            class="mx-1"
-            @click="
-              $router.push({
-                name: 'GameScreen',
-              })
-            "
-            >About</v-btn
-          ></v-col
-        >
         <!-- <section class="headline"></section> -->
       </v-container>
     </v-container>
@@ -54,5 +30,6 @@
 export default {
   name: "MainScreen",
   data: () => ({}),
+  props: {},
 };
 </script>
