@@ -12,6 +12,7 @@ export default new VueRouter({
       path: "/",
       name: "MainMenu",
       component: MainMenu,
+      props: true,
     },
     {
       path: "/maingame",

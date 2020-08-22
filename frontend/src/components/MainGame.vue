@@ -2,7 +2,7 @@
   <v-app>
     <v-container>
       <h1 class="display-3 font-weight-bold my-5 text-center">
-        The Game of Chess
+        The Game of Chess {{ gameCode }}
       </h1>
       <v-container class="text-center">
         <v-col
@@ -43,6 +43,12 @@ import InstructionsPopup from "@/components/InstructionsPopup";
 export default {
   name: "MainScreen",
   data: () => ({ instructionsDialog: false }),
+  // props: ["gameCode"],
+  computed: {
+    gameCode: function() {
+      return this.$route.query.gameCode;
+    },
+  },
   components: {
     InstructionsPopup: InstructionsPopup,
   },
