@@ -15,15 +15,7 @@
           ></v-col
         >
         <v-col
-          ><v-btn
-            large
-            color="error"
-            class="mx-1"
-            @click="
-              $router.push({
-                name: 'RoundEnd',
-              })
-            "
+          ><v-btn large color="error" class="mx-1" @click="resign"
             >Resign</v-btn
           ></v-col
         >
@@ -44,6 +36,15 @@ export default {
   name: "MainScreen",
   data: () => ({ instructionsDialog: false }),
   // props: ["gameCode"],
+  methods: {
+    resign: function() {
+      // TODO: get code function
+      this.$router.push({
+        name: "RoundEnd",
+        query: { gameCode: this.gameCode, result: "defeat" },
+      });
+    },
+  },
   computed: {
     gameCode: function() {
       return this.$route.query.gameCode;
