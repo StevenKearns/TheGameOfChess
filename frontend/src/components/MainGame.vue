@@ -4,7 +4,10 @@
       <h1 class="display-3 font-weight-bold my-5 text-center">
         The Game of Chess {{ gameCode }}
       </h1>
+      The gamecode is: {{ gameCode }} <br />Send this url to your opponent:
+      http://localhost:8080/maingame?gameCode={{ gameCode }}
       <v-container class="text-center">
+        <Chessboard></Chessboard>
         <v-col
           ><v-btn
             large
@@ -32,6 +35,7 @@
 
 <script>
 import InstructionsPopup from "@/components/InstructionsPopup";
+import Chessboard from "@/components/Chessboard";
 export default {
   name: "MainScreen",
   data: () => ({ instructionsDialog: false }),
@@ -52,6 +56,7 @@ export default {
   },
   components: {
     InstructionsPopup: InstructionsPopup,
+    Chessboard: Chessboard,
   },
 };
 </script>
