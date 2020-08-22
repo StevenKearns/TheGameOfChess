@@ -40,7 +40,6 @@
         <v-dialog v-model="aboutDialog" max-width="600"
           ><AboutPopup></AboutPopup
         ></v-dialog>
-        <!-- <section class="headline"></section> -->
       </v-container>
     </v-container>
   </v-app>
