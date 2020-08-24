@@ -21,6 +21,12 @@ export default {
       .fill()
       .map(() => "color"),
   }),
+  mounted() {
+    this.$root.$on("clickedsquare", (index) => {
+      console.log(index, "clicked");
+      // this.pixels.splice(index, 1, this.color);
+    });
+  },
   components: {
     ChessSquare,
   },

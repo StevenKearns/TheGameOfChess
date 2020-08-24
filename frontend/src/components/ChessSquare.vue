@@ -15,9 +15,7 @@ export default {
   },
   methods: {
     handleClick: function() {
-      // if (this.isInColorPicker) {
-      //   this.$root.$emit("updatecolor", this.color);
-      // }
+      this.$root.$emit("clickedsquare", this.index);
     },
   },
 };
