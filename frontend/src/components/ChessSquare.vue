@@ -1,8 +1,10 @@
 <template>
   <div
     :class="['square', color, highlight ? 'highlight' : '']"
-    @click="handleClick"
-  ></div>
+    @click.end="handleClick"
+  >
+    {{ piece }}
+  </div>
 </template>
 
 <script>
@@ -10,7 +12,7 @@ export default {
   props: {
     color: String,
     highlight: Boolean,
-    pieceName: String,
+    piece: String,
     index: Number,
   },
   methods: {
