@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: "ChessSquare",
   props: {
     color: String,
     highlight: Boolean,

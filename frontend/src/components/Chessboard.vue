@@ -3,9 +3,9 @@
     <v-row>
       <ChessSquare
         v-for="(piece, index) in squares"
-        :color="colors[(Math.floor(index / 8) + index) % 2]"
         v-bind:key="index"
-        :piece="squares[index]"
+        :piece="piece"
+        :color="colors[(Math.floor(index / 8) + index) % 2]"
         :index="index"
     /></v-row>
   </div>
