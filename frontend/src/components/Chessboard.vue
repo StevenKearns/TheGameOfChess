@@ -23,17 +23,7 @@ export default {
       .map(() => ""),
     firstSpot: null,
   }),
-  mounted() {
-    this.$root.$on("clickedsquare", (index) => {
-      console.log(index, "clicked");
-      // this.pixels.splice(index, 1, this.color);
-      if (this.firstSpot) {
-        // console.log(this.firstSpot, "->", index);
-        this.move(this.firstSpot, index);
-      } else {
-        this.firstSpot = index;
-      }
-    });
+  created() {
     // caps for white, lowercase for black
     this.squares[0] = "r";
     this.squares[1] = "n";
@@ -57,6 +47,18 @@ export default {
     for (let i = 0; i < 8; i++) {
       this.squares[this.tileXYTo64(6, i)] = "p";
     }
+  },
+  mounted() {
+    this.$root.$on("clickedsquare", (index) => {
+      console.log(index, "clicked");
+      // this.pixels.splice(index, 1, this.color);
+      if (this.firstSpot) {
+        // console.log(this.firstSpot, "->", index);
+        this.move(this.firstSpot, index);
+      } else {
+        this.firstSpot = index;
+      }
+    });
   },
   methods: {
     tile64ToXY(tile) {

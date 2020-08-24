@@ -2,7 +2,7 @@
   <v-app>
     <v-container>
       <h1 class="display-3 font-weight-bold my-5 text-center">
-        The Game of Chess {{ gameCode }}
+        The Game of Chess
       </h1>
       The gamecode is: {{ gameCode }} <br />Send this url to your opponent:
       http://localhost:8080/maingame?gameCode={{ gameCode }}
