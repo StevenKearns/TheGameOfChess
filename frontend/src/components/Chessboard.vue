@@ -3,7 +3,7 @@
     <v-row>
       <ChessSquare
         v-for="(piece, index) in squares"
-        v-bind:key="index"
+        :key="index"
         :piece="piece"
         :color="colors[(Math.floor(index / 8) + index) % 2]"
         :index="index"
@@ -47,7 +47,7 @@ export default {
     this.squares[this.tileXYTo64(7, 6)] = "N";
     this.squares[this.tileXYTo64(7, 7)] = "R";
     for (let i = 0; i < 8; i++) {
-      this.squares[this.tileXYTo64(6, i)] = "p";
+      this.squares[this.tileXYTo64(6, i)] = "P";
     }
   },
   mounted() {
@@ -77,10 +77,15 @@ export default {
       let val1 = this.squares[i1];
       if (val1) {
         console.log(i1, "->", i2);
-        this.squares[i2] = val1;
-        this.squares[i1] = "";
+        this.updateSquare(i2, val1);
+        this.updateSquare(i1, "");
+        // this.squares[i2] = val1;
+        // this.squares[i1] = "";
         console.log(this.squares);
       }
+    },
+    updateSquare(index, value) {
+      this.squares.splice(index, 1, value);
     },
   },
   components: {

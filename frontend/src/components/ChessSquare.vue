@@ -18,6 +18,7 @@ export default {
   },
   methods: {
     handleClick: function() {
+      // console.log("piece clicked", this.piece);
       this.$root.$emit("clickedsquare", this.index);
     },
   },
