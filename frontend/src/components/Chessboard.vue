@@ -15,18 +15,20 @@
 import ChessSquare from "./ChessSquare";
 
 export default {
-  data: () => ({
-    colors: ["white", "brown"],
-    // Very proud of the colors
-    squares: Array(8 * 8)
-      .fill()
-      .map(() => ""),
-    firstSpot: null,
-  }),
+  data: function() {
+    return {
+      colors: ["white", "brown"],
+      // Very proud of the colors
+      squares: Array(8 * 8)
+        .fill()
+        .map(() => ""),
+      firstSpot: null,
+    };
+  },
   created() {
     // caps for white, lowercase for black
-    this.squares[0] = "r";
-    this.squares[1] = "n";
+    this.squares[this.tileXYTo64(0, 0)] = "r";
+    this.squares[this.tileXYTo64(0, 1)] = "n";
     this.squares[this.tileXYTo64(0, 2)] = "b";
     this.squares[this.tileXYTo64(0, 3)] = "q";
     this.squares[this.tileXYTo64(0, 4)] = "k";
@@ -67,15 +69,18 @@ export default {
       return row, col;
     },
     tileXYTo64(row, col) {
-      console.log(row, col, "=>", row * 8 + col);
+      // console.log(row, col, "=>", row * 8 + col);
       return row * 8 + col;
     },
     move(i1, i2) {
-      console.log(i1, "->", i2);
       this.firstSpot = null;
-      this.squares[i2] = this.squares[i1];
-      this.squares[i1] = "";
-      console.log(this.squares);
+      let val1 = this.squares[i1];
+      if (val1) {
+        console.log(i1, "->", i2);
+        this.squares[i2] = val1;
+        this.squares[i1] = "";
+        console.log(this.squares);
+      }
     },
   },
   components: {
