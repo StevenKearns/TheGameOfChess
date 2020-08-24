@@ -8,6 +8,8 @@
       http://localhost:8080/maingame?gameCode={{ gameCode }}
       <v-container class="text-center">
         <Chessboard></Chessboard>
+      </v-container>
+      <v-container class="text-center">
         <v-col
           ><v-btn
             large
