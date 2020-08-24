@@ -63,6 +63,10 @@ export default {
     });
   },
   methods: {
+    isValidMove(pieceName, index1, index2) {
+      console.log(pieceName, index1, index2);
+      return true;
+    },
     tile64ToXY(tile) {
       let col = tile % 8;
       let row = Math.floor(tile / 8);
@@ -75,12 +79,10 @@ export default {
     move(i1, i2) {
       this.firstSpot = null;
       let val1 = this.squares[i1];
-      if (val1) {
+      if (val1 && this.isValidMove(val1, i1, i2)) {
         console.log(i1, "->", i2);
         this.updateSquare(i2, val1);
         this.updateSquare(i1, "");
-        // this.squares[i2] = val1;
-        // this.squares[i1] = "";
         console.log(this.squares);
       }
     },
