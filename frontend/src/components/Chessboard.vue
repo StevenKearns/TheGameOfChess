@@ -12,11 +12,13 @@
 </template>
 
 <script>
+import io from "socket.io-client";
 import ChessSquare from "./ChessSquare";
 
 export default {
   data: function() {
     return {
+      socket: {},
       colors: ["white", "brown"],
       // Very proud of the colors
       squares: Array(8 * 8)
@@ -26,6 +28,7 @@ export default {
     };
   },
   created() {
+    this.socket = io("http://localhost:3000");
     // caps for white, lowercase for black
     this.squares[this.tileXYTo64(0, 0)] = "r";
     this.squares[this.tileXYTo64(0, 1)] = "n";
@@ -51,6 +54,11 @@ export default {
     }
   },
   mounted() {
+    this.socket.on("chessboard", data => {
+      this.chessboard = data;
+      console.log(this.chessboard);
+    });
+
     this.$root.$on("clickedsquare", (index) => {
       console.log(index, "clicked");
       // this.pixels.splice(index, 1, this.color);
@@ -81,7 +89,8 @@ export default {
         this.updateSquare(i1, "");
         // this.squares[i2] = val1;
         // this.squares[i1] = "";
-        console.log(this.squares);
+        //console.log(this.squares);
+      this.socket.emit("move", this.squares);
       }
     },
     updateSquare(index, value) {
