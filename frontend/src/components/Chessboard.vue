@@ -68,7 +68,6 @@ export default {
       console.log(index, "clicked");
       // this.pixels.splice(index, 1, this.color);
       if (this.firstSpot) {
-        // console.log(this.firstSpot, "->", index);
         this.move(this.firstSpot, index);
       } else {
         this.firstSpot = index;
@@ -76,19 +75,22 @@ export default {
     });
   },
   methods: {
+    isValidMove(pieceName, index1, index2) {
+      console.log(pieceName, index1, "=>", index2);
+      return true;
+    },
     tile64ToXY(tile) {
       let col = tile % 8;
       let row = Math.floor(tile / 8);
       return row, col;
     },
     tileXYTo64(row, col) {
-      // console.log(row, col, "=>", row * 8 + col);
       return row * 8 + col;
     },
     move(i1, i2) {
       this.firstSpot = null;
       let val1 = this.squares[i1];
-      if (val1) {
+      if (val1 && this.isValidMove(val1, i1, i2)) {
         console.log(i1, "->", i2);
         this.updateSquare(i2, val1);
         this.updateSquare(i1, "");
