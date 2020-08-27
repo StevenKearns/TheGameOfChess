@@ -52,13 +52,13 @@ export default {
     for (let i = 0; i < 8; i++) {
       this.squares[this.tileXYTo64(6, i)] = "P";
     }
+    
+    this.socket.emit("initialize", this.squares);
   },
   mounted() {
     this.socket.on("chessboard", data => {
-      this.chessboard = data;
-      console.log(this.chessboard);
+      this.squares = data.squares;
     });
-
     this.$root.$on("clickedsquare", (index) => {
       console.log(index, "clicked");
       // this.pixels.splice(index, 1, this.color);

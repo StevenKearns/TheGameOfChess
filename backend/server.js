@@ -13,12 +13,15 @@ var chessboard = {
 
 Socketio.on("connection", socket => {
     console.log("Player has connected.");
-    socket.emit("chessboard", chessboard);
-    console.log(chessboard);
-    socket.on("move", data => {
-        console.log(data);
+    socket.on("initialize", data => {
         chessboard.squares = data;
         Socketio.emit("chessboard", chessboard);
+    });
+    socket.emit("chessboard", chessboard);
+    socket.on("move", data => {
+        chessboard.squares = data;
+        Socketio.emit("chessboard", chessboard);
+        console.log("Updated chessboard: ", chessboard.squares);
     });
 });
 
