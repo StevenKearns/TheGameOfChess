@@ -52,7 +52,7 @@ export default {
   methods: {
     generateCode: function() {
       // TODO: get code function
-      let code;
+      let code = 1234;
       this.$router.push({
         name: "MainGame",
         query: { gameCode: code },

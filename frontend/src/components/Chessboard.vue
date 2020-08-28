@@ -71,7 +71,9 @@ export default {
       this.checkGameStatus();
     });
     this.socket.on("playerId", (data) => {
-      this.playerId = data;
+      if (this.playerId == 0) {
+        this.playerId = data;
+      }
     });
     this.socket.on("currentTurn", (data) => {
       this.currentTurn = data;
@@ -106,7 +108,7 @@ export default {
         return;
       }
       if (this.currentTurn != this.playerId) {
-        // return;
+        return;
       }
       if (
         (this.playerId == 1 && val1 == val1.toLowerCase()) ||
