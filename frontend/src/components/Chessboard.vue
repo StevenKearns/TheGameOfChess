@@ -79,7 +79,7 @@ export default {
       this.currentTurn = data;
     });
     this.$root.$on("clickedsquare", (index) => {
-      console.log(index, "clicked");
+      // console.log(index, "clicked");
       if (this.firstSpot) {
         this.move(this.firstSpot, index);
       } else {
@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     isValidMove(pieceName, index1, index2) {
-      console.log(pieceName, index1, "=>", index2);
+      console.log("Checking valid move: ", pieceName, index1, "=>", index2);
       return true;
     },
     tile64ToXY(tile) {
@@ -118,7 +118,7 @@ export default {
         return;
       }
       if (val1 && this.isValidMove(val1, i1, i2)) {
-        console.log(i1, "->", i2);
+        console.log("Moving: ", i1, "->", i2);
         this.updateSquare(i2, val1);
         this.updateSquare(i1, "");
         this.emitMove();
@@ -127,6 +127,9 @@ export default {
     },
     checkGameStatus() {
       // Check for kings to see if player has won, lost, or drawn
+      if (this.playerId == 0) {
+        return;
+      }
       if (!this.squares.includes("k") && !this.squares.includes("K")) {
         this.$router.push({
           name: "RoundEnd",

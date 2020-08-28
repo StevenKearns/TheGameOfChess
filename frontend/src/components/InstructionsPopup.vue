@@ -7,8 +7,11 @@
         game, you must input a valid numerical code into the join game pop-up or
         paste a url into your browser. To create a game, you must click on
         create game, and the code and link will be automatically generated.
-        Share this with your opponent. Click on "About" to find out more about
-        the game code and developers.</v-card-text
+        Share this with your opponent. <br />
+        <br />
+        Click on a piece and then the space where you want to move to move your
+        piece. You can only move when it's your turn. You can only move your own
+        pieces.</v-card-text
       ></v-container
     ></v-card
   >
