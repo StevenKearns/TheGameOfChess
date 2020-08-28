@@ -3,7 +3,9 @@
     ><v-container
       ><v-card-title>About</v-card-title>
       <v-card-text
-        ><a href="https://github.com/StevenKearns/the-game-of-chess"
+        ><a
+          href="https://github.com/StevenKearns/the-game-of-chess"
+          target="_blank"
           >Code repository</a
         >
         <v-divider class="my-5"></v-divider>Developers: Akshay Lulla, Ben Loeb,
