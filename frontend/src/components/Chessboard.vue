@@ -1,5 +1,6 @@
 <template>
   <div class="board">
+    <h4>Player {{ playerId }}</h4>
     <v-row>
       <ChessSquare
         v-for="(piece, index) in squares"
@@ -19,8 +20,9 @@ export default {
   data: function() {
     return {
       socket: {},
-      // TODO: player id: -1 (black), 0(unconnected), 1(white)
-      // TODO: myTurn: boolean
+      // playerId: -1 (black), 0(unconnected), 1(white)
+      playerId: 0,
+      myTurn: false,
       colors: ["white", "brown"],
       // Very proud of the colors
       squares: Array(8 * 8)
@@ -63,6 +65,10 @@ export default {
   mounted() {
     this.socket.on("chessboard", (data) => {
       this.squares = data.squares;
+      this.checkGameStatus();
+    });
+    this.socket.on("playerId", (data) => {
+      this.playerId = data;
     });
     this.$root.$on("clickedsquare", (index) => {
       console.log(index, "clicked");
@@ -94,11 +100,35 @@ export default {
         console.log(i1, "->", i2);
         this.updateSquare(i2, val1);
         this.updateSquare(i1, "");
-        // this.squares[i2] = val1;
-        // this.squares[i1] = "";
-        //console.log(this.squares);
-        this.socket.emit("move", this.squares);
+        this.emitMove();
+        this.checkGameStatus();
       }
+    },
+    checkGameStatus() {
+      // Check for kings to see if player has won, lost, or drawn
+      if (!this.squares.includes("k") && !this.squares.includes("K")) {
+        this.$router.push({
+          name: "RoundEnd",
+          query: { gameCode: this.gameCode, result: "draw" },
+        });
+      } else if (!this.squares.includes("k")) {
+        let result;
+        this.playerId == 1 ? (result = "victory") : (result = "defeat");
+        this.$router.push({
+          name: "RoundEnd",
+          query: { gameCode: this.gameCode, result: result },
+        });
+      } else if (!this.squares.includes("K")) {
+        let result;
+        this.playerId == -1 ? (result = "victory") : (result = "defeat");
+        this.$router.push({
+          name: "RoundEnd",
+          query: { gameCode: this.gameCode, result: result },
+        });
+      }
+    },
+    emitMove() {
+      this.socket.emit("move", this.squares);
     },
     updateSquare(index, value) {
       this.squares.splice(index, 1, value);

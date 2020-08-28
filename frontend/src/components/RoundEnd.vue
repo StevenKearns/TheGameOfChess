@@ -2,7 +2,7 @@
   <v-app>
     <v-container>
       <h1 class="display-3 font-weight-bold my-5 text-center">
-        You suffered a horrible {{ result }}
+        You suffered a horrible {{ result }}.
       </h1>
       <v-container class="text-center">
         <v-col
