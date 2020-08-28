@@ -106,7 +106,7 @@ export default {
         return;
       }
       if (this.currentTurn != this.playerId) {
-        return;
+        // return;
       }
       if (
         (this.playerId == 1 && val1 == val1.toLowerCase()) ||
