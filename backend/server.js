@@ -20,8 +20,10 @@ Socketio.on("connection", (socket) => {
     let playerId;
     if (playerCount == 1) {
       playerId = 1;
-    } else {
+    } else if (playerCount == 2) {
       playerId = -1;
+    } else {
+      playerId = -2;
     }
     Socketio.emit("playerId", playerId);
     Socketio.emit("currentTurn", 1);
