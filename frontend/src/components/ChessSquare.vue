@@ -26,7 +26,7 @@ export default {
 
 <style scoped>
 .square {
-  border: 2px solid black;
+  border: 2px solid grey;
   width: 50px;
   height: 50px;
   box-sizing: border-box;
