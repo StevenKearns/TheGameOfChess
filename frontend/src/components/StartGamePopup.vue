@@ -27,13 +27,7 @@
       ><v-divider></v-divider>
       <v-row
         ><v-col
-          ><v-text-field
-            readonly
-            v-model="generatedCode"
-            label="Generated Code"
-          ></v-text-field></v-col
-        ><v-col
-          ><v-btn large color="primary" class="mx-1" @click="generateCode"
+          ><v-btn block color="primary" class="mx-1" @click="generateCode"
             >Generate Game Code</v-btn
           ></v-col
         ></v-row
@@ -58,14 +52,14 @@ export default {
   methods: {
     generateCode: function() {
       // TODO: get code function
+      let code;
       this.$router.push({
         name: "MainGame",
-        query: { gameCode: this.generatedCode },
+        query: { gameCode: code },
       });
     },
   },
   data: () => ({
-    generatedCode: "",
     inputCode: "",
   }),
 };
