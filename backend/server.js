@@ -6,7 +6,7 @@ var chessboard = {
   squares: Array(8 * 8)
     .fill()
     .map(() => ""),
-  playerTurn: 0,
+  currentTurn: 0,
 };
 
 Socketio.on("connection", (socket) => {
@@ -24,14 +24,17 @@ Socketio.on("connection", (socket) => {
       playerId = -1;
     }
     Socketio.emit("playerId", playerId);
+    Socketio.emit("currentTurn", 1);
   });
 
   socket.emit("chessboard", chessboard);
 
   socket.on("move", (data) => {
-    chessboard.squares = data;
+    chessboard.squares = data.squares;
     Socketio.emit("chessboard", chessboard);
-    console.log("Updated chessboard: ", chessboard.squares);
+    chessboard.currentTurn = data.playerId * -1;
+    Socketio.emit("currentTurn", chessboard.currentTurn);
+    // console.log("Updated chessboard: ", chessboard.squares);
   });
 });
 

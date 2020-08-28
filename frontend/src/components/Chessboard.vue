@@ -1,6 +1,9 @@
 <template>
   <div class="board">
-    <h4>Player {{ playerId }}</h4>
+    <h4>
+      Player {{ playerId }} <br />
+      Current Turn {{ currentTurn }}
+    </h4>
     <v-row>
       <ChessSquare
         v-for="(piece, index) in squares"
@@ -22,7 +25,7 @@ export default {
       socket: {},
       // playerId: -1 (black), 0(unconnected), 1(white)
       playerId: 0,
-      myTurn: false,
+      currentTurn: 0,
       colors: ["white", "brown"],
       // Very proud of the colors
       squares: Array(8 * 8)
@@ -70,9 +73,11 @@ export default {
     this.socket.on("playerId", (data) => {
       this.playerId = data;
     });
+    this.socket.on("currentTurn", (data) => {
+      this.currentTurn = data;
+    });
     this.$root.$on("clickedsquare", (index) => {
       console.log(index, "clicked");
-      // this.pixels.splice(index, 1, this.color);
       if (this.firstSpot) {
         this.move(this.firstSpot, index);
       } else {
@@ -96,6 +101,20 @@ export default {
     move(i1, i2) {
       this.firstSpot = null;
       let val1 = this.squares[i1];
+      if (i1 == i2) {
+        // No move
+        return;
+      }
+      if (this.currentTurn != this.playerId) {
+        return;
+      }
+      if (
+        (this.playerId == 1 && val1 == val1.toLowerCase()) ||
+        (this.playerId == -1 && val1 == val1.toUpperCase())
+      ) {
+        // Player attempting to move other player's pieces
+        return;
+      }
       if (val1 && this.isValidMove(val1, i1, i2)) {
         console.log(i1, "->", i2);
         this.updateSquare(i2, val1);
@@ -128,7 +147,11 @@ export default {
       }
     },
     emitMove() {
-      this.socket.emit("move", this.squares);
+      let moveInfo = {
+        squares: this.squares,
+        playerId: this.playerId,
+      };
+      this.socket.emit("move", moveInfo);
     },
     updateSquare(index, value) {
       this.squares.splice(index, 1, value);
@@ -144,6 +167,7 @@ export default {
 .board {
   display: flex;
   flex-wrap: wrap;
+  min-width: 400px;
   max-width: 400px;
 }
 </style>
