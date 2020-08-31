@@ -12,6 +12,7 @@ npm install
 ### Compiles and runs server
 ```
 npm run start
+```
 
 ## frontend setup
 ```
